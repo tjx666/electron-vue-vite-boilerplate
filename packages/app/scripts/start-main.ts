@@ -1,34 +1,53 @@
-import chokidar from 'chokidar';
-import { resolve } from 'path';
 import { yellowBright } from 'chalk';
-import { command } from 'execa';
+import { ChildProcess, spawn } from 'child_process';
+import chokidar from 'chokidar';
+import electron from 'electron';
+import { command, ExecaChildProcess } from 'execa';
+import { resolve } from 'path';
 
+import { debounce } from '../src/main/src/utils/debounce';
 import { waitOnHttpPage } from './utils';
 
-async function main() {
-  const mainDir = resolve(__dirname, '../src/main');
-  const rootDir = resolve(__dirname, '../');
+async function runCommandWithOutput(
+  commandStr: string,
+  callback?: (subprocess: ExecaChildProcess) => void,
+) {
+  const subprocess = command(commandStr);
+  if (callback) callback(subprocess);
+  subprocess.stdout?.pipe(process.stdout);
+  await subprocess;
+}
 
+async function main() {
+  const rootDir = resolve(__dirname, '../');
+  const mainDir = resolve(rootDir, 'src/main');
   const compileTsCommand = `npx tsc -p ${mainDir}`;
-  const startupElectronCommand = `npx electron ${rootDir}`;
+
+  let electronMainProcess: ChildProcess | undefined;
+  function startupElectron() {
+    electronMainProcess?.kill();
+    // startup electron, electron will find entry with package.json main field
+    electronMainProcess = spawn(electron as any, [rootDir], {
+      stdio: 'inherit',
+    });
+  }
 
   // compile main typescript
-  await command(compileTsCommand);
+  await runCommandWithOutput(compileTsCommand);
+
+  // watch main process source files change and restart
+  const watcher = chokidar.watch(resolve(mainDir, './src'));
+  async function handleChange(path: string) {
+    console.log(yellowBright`File ${path} change, auto recompile and restart main...`);
+    await runCommandWithOutput(compileTsCommand);
+    startupElectron();
+  }
+  watcher.on('change', debounce(handleChange, 2000));
 
   // wait util vite serve the page
   await waitOnHttpPage();
 
-  // startup electron, electron will find entry with package.json main field
-  await command(startupElectronCommand);
-
-  // watch main package files change and restart
-
-  const watcher = chokidar.watch(mainDir);
-  watcher.on('change', async (path) => {
-    console.log(yellowBright`File ${path} change, auto recompile and restart main...`);
-    await command(compileTsCommand);
-    await command(startupElectronCommand);
-  });
+  startupElectron();
 }
 
 main();
