@@ -1,25 +1,29 @@
 {
-  "name": "app",
-  "version": "0.0.0",
-  "main": "src/main/dist/index.js",
-  "scripts": {
-    "start": "concurrently -r -i --kill-others-on-fail npm:start:renderer npm:start:main",
-    "start:renderer": "vite serve ./src/renderer",
-    "start:main": "ts-node ./scripts/start-main.ts",
-    "build": "vue-tsc --noEmit && vite build",
-    "serve": "vite preview"
-  },
-  "dependencies": {
-    "electron-localshortcut": "^3.2.1",
-    "vue": "^3.0.5"
-  },
-  "devDependencies": {
-    "@types/electron-localshortcut": "^3.1.0",
-    "@vitejs/plugin-vue": "^1.2.4",
-    "@vue/compiler-sfc": "^3.0.5",
-    "electron-devtools-installer": "^3.2.0",
-    "execa": "^5.1.1",
-    "vite": "^2.4.0",
-    "vue-tsc": "^0.0.24"
-  }
+    "name": "app",
+    "version": "0.0.0",
+    "main": "src/main/dist/index.js",
+    "scripts": {
+        "start": "concurrently -r -i --kill-others-on-fail npm:start:renderer npm:start:main",
+        "start:renderer": "vite serve ./src/renderer",
+        "start:main": "ts-node ./scripts/start-main.ts",
+        "build": "vue-tsc --noEmit && vite build",
+        "serve": "vite preview"
+    },
+    "dependencies": {
+        "electron-localshortcut": "^3.2.1",
+        "electron-store": "^8.0.0",
+        "vue": "^3.0.5",
+        "vue-router": "4"
+    },
+    "devDependencies": {
+        "@types/electron-localshortcut": "^3.1.0",
+        "@vitejs/plugin-vue": "^1.2.4",
+        "@vue/compiler-sfc": "^3.0.5",
+        "electron-devtools-installer": "^3.2.0",
+        "execa": "^5.1.1",
+        "less": "^4.1.1",
+        "vite": "^2.4.0",
+        "vite-plugin-components": "^0.12.2",
+        "vue-tsc": "^0.0.24"
+    }
 }

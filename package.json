@@ -1,35 +1,59 @@
 {
-  "name": "electron-vue-vite-boilerplate",
-  "version": "1.0.0",
-  "description": "A boilerplate with specific optimization for electron-vue-vite technology stack",
-  "scripts": {
-    "app": "pnpm start --filter app",
-    "test": "echo \"Error: no test specified\""
-  },
-  "keywords": [
-    "electron",
-    "vue",
-    "vite",
-    "boilerplate",
-    "templet"
-  ],
-  "author": "YuTengjing",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/jest": "^26.0.24",
-    "@types/node": "^16.3.1",
-    "@vue/runtime-dom": "3.1.4",
-    "chalk": "^4.1.1",
-    "chokidar": "^3.5.2",
-    "concurrently": "^6.2.0",
-    "execa": "^5.1.1",
-    "jest": "^27.0.6",
-    "prettier": "^2.3.2",
-    "ts-jest": "^27.0.3",
-    "ts-node": "^10.1.0",
-    "typescript": "^4.3.5"
-  },
-  "dependencies": {
-    "electron": "^13.1.6"
-  }
+    "name": "electron-vue-vite-boilerplate",
+    "version": "1.0.0",
+    "private": true,
+    "keywords": [
+        "electron",
+        "vue",
+        "vite",
+        "boilerplate",
+        "templet"
+    ],
+    "lint-staged": {
+        "*.{ts,vue,js}": [
+            "eslint -c .eslintrc.js",
+            "format-imports --config .vscode/import-sorter.json"
+        ],
+        "*.{vue,css,less,scss}": [
+            "stylelint --config .stylelintrc.json"
+        ],
+        "*.{ts,vue,json,js,css,less,scss,md,svg}": [
+            "prettier --write"
+        ]
+    },
+    "scripts": {
+        "app": "pnpm start --filter app",
+        "test": "echo \"Error: no test specified\"",
+        "prepare": "husky install"
+    },
+    "devDependencies": {
+        "@types/jest": "^26.0.24",
+        "@types/node": "^16.3.1",
+        "@typescript-eslint/eslint-plugin": "^4.28.3",
+        "@typescript-eslint/parser": "^4.28.3",
+        "@vue/runtime-dom": "3.1.4",
+        "chalk": "^4.1.1",
+        "chokidar": "^3.5.2",
+        "concurrently": "^6.2.0",
+        "eslint": "^7.30.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-vue": "^7.13.0",
+        "execa": "^5.1.1",
+        "format-imports": "^2.4.1",
+        "husky": "^7.0.0",
+        "jest": "^27.0.6",
+        "lint-staged": "^11.0.1",
+        "prettier": "^2.3.2",
+        "stylelint": "^13.13.1",
+        "stylelint-config-prettier": "^8.0.2",
+        "stylelint-config-recess-order": "^2.4.0",
+        "stylelint-config-standard": "^22.0.0",
+        "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
+        "ts-jest": "^27.0.3",
+        "ts-node": "^10.1.0",
+        "typescript": "^4.3.5"
+    },
+    "dependencies": {
+        "electron": "^13.1.6"
+    }
 }
