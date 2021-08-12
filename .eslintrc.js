@@ -24,6 +24,7 @@ module.exports = {
         'linebreak-style': [ERROR, 'unix'],
         quotes: [ERROR, 'single'],
         semi: [ERROR, 'always'],
+        'no-undef': OFF,
 
         '@typescript-eslint/no-explicit-any': OFF,
         '@typescript-eslint/ban-types': OFF,

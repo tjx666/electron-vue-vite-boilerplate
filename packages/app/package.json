@@ -12,18 +12,18 @@
     "dependencies": {
         "electron-localshortcut": "^3.2.1",
         "electron-store": "^8.0.0",
-        "vue": "^3.0.5",
+        "vue": "next",
         "vue-router": "4"
     },
     "devDependencies": {
         "@types/electron-localshortcut": "^3.1.0",
         "@vitejs/plugin-vue": "^1.2.4",
-        "@vue/compiler-sfc": "^3.0.5",
+        "@vue/compiler-sfc": "latest",
         "electron-devtools-installer": "^3.2.0",
         "execa": "^5.1.1",
         "less": "^4.1.1",
         "vite": "^2.4.0",
         "vite-plugin-components": "^0.12.2",
-        "vue-tsc": "^0.0.24"
+        "vue-tsc": "latest"
     }
 }
