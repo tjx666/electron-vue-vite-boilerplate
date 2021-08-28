@@ -1,19 +1,15 @@
 // copied from https://github.com/mawie81/electron-window-state/blob/master/index.js
+
 // This helper remembers the size and position of your windows, and restores
 // them in that place after app relaunch.
 // Can be used for more than one window, just construct many
 // instances of it and give each different name.
 
-import { app, BrowserWindow, Rectangle, screen } from 'electron';
-import fs from 'fs';
+import { app, BrowserWindow, BrowserWindowConstructorOptions, Rectangle, screen } from 'electron';
+import fs from 'fs-extra';
 import path from 'path';
 
 import { debounce } from './debounce';
-
-interface CreateWindowOptions {
-    width: number;
-    height: number;
-}
 
 interface WindowState {
     x: number;
@@ -22,19 +18,23 @@ interface WindowState {
     height: number;
 }
 
-export default function createWindow(name: string, options: CreateWindowOptions): BrowserWindow {
-    const userDataDir = path.dirname(app.getPath('userData'));
+export default async function createWindow(
+    name: string,
+    options: BrowserWindowConstructorOptions,
+): Promise<BrowserWindow> {
+    const userDataDir = app.getPath('userData');
     const stateStoreFile = path.resolve(userDataDir, `window-state-${name}.json`);
     const defaultSize = {
-        width: options.width,
-        height: options.height,
+        width: options.width ?? 1024,
+        height: options.height ?? 670,
     };
 
-    const getSavedState = () => {
+    const getSavedState = async () => {
         let savedState: WindowState | undefined;
         try {
-            savedState = JSON.parse(fs.readFileSync(stateStoreFile, { encoding: 'utf-8' }));
-        } catch (err) {
+            savedState = await fs.readJSON(stateStoreFile);
+        } catch (error) {
+            console.error(error);
             // For some reason json can't be read (might be corrupted).
             // No worries, we have defaults.
         }
@@ -81,8 +81,12 @@ export default function createWindow(name: string, options: CreateWindowOptions)
         return windowState;
     };
 
-    const state = ensureVisibleOnSomeDisplay(getSavedState());
-    const win = new BrowserWindow(Object.assign({ nodeIntegration: true }, options, state));
+    const state = ensureVisibleOnSomeDisplay(await getSavedState());
+    const mergedOptions: BrowserWindowConstructorOptions = {
+        ...options,
+        ...state,
+    };
+    const win = new BrowserWindow(mergedOptions);
 
     const saveState = debounce(() => {
         if (!win.isMinimized() && !win.isMaximized()) {
@@ -97,9 +101,7 @@ export default function createWindow(name: string, options: CreateWindowOptions)
     }, 200);
 
     win.on('resize', saveState);
-    win.on('close', saveState);
     win.on('move', saveState);
-    win.on('close', saveState);
 
     return win;
 }

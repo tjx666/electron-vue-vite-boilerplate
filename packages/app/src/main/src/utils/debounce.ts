@@ -1,3 +1,5 @@
+// 防抖工具函数
+
 export function debounce<F extends Function>(fn: F, delay: number, immediate = false): F {
     let timeoutId: NodeJS.Timeout | undefined;
 

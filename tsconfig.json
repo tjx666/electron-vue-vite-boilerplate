@@ -10,7 +10,6 @@
         "strict": true,
 
         /* Additional Checks */
-        "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
 
         /* Module Resolution Options */

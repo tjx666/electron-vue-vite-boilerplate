@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "compileForDebugAppMain",
+            "command": "ts-node",
+            "type": "shell",
+            "args": ["./scripts/pre-vscode-debug.ts"],
+            "presentation": {
+                "reveal": "always"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}/packages/app"
+            }
+        }
+    ]
+}

@@ -1,8 +1,9 @@
 import { BrowserWindow } from 'electron';
 import localShortcut from 'electron-localshortcut';
 
+import { isMacOS } from './constants';
+
 export function registerDevShortcuts() {
-    // register some useful shortcuts
     localShortcut.register('CommandOrControl+R', () => {
         const win = BrowserWindow.getFocusedWindow();
         if (win) {
@@ -10,19 +11,25 @@ export function registerDevShortcuts() {
         }
     });
 
-    function openDevTools() {
+    function toggleDevTools() {
         const win = BrowserWindow.getFocusedWindow();
-        if (win) {
-            const { webContents } = win;
-            if (webContents.isDevToolsOpened()) {
-                webContents.closeDevTools();
-            } else {
-                webContents.openDevTools();
-            }
+        if (!win) return;
+
+        const { webContents } = win;
+        if (webContents.isDevToolsOpened()) {
+            webContents.closeDevTools();
+        } else {
+            webContents.openDevTools();
         }
     }
 
-    const isMacOS = process.platform === 'darwin';
-    localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', openDevTools);
-    localShortcut.register('F12', openDevTools);
+    function openDebugPage() {
+        const win = BrowserWindow.getFocusedWindow();
+        if (!win) return;
+        win.webContents.send('open-debug-page');
+    }
+
+    localShortcut.register(isMacOS ? 'Command+Alt+I' : 'Control+Shift+I', toggleDevTools);
+    localShortcut.register(isMacOS ? 'Command+Alt+D' : 'Control+Shift+D', openDebugPage);
+    localShortcut.register('F12', toggleDevTools);
 }

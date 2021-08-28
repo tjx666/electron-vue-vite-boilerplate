@@ -22,38 +22,37 @@
         ]
     },
     "scripts": {
+        "main": "pnpm start:main --filter app",
+        "renderer": "pnpm start:renderer --filter app",
         "app": "pnpm start --filter app",
-        "test": "echo \"Error: no test specified\"",
         "prepare": "husky install"
     },
     "devDependencies": {
-        "@types/jest": "^26.0.24",
-        "@types/node": "^16.3.1",
-        "@typescript-eslint/eslint-plugin": "^4.28.3",
-        "@typescript-eslint/parser": "^4.28.3",
-        "@vue/runtime-dom": "3.1.4",
-        "chalk": "^4.1.1",
-        "chokidar": "^3.5.2",
-        "concurrently": "^6.2.0",
-        "eslint": "^7.30.0",
+        "@types/jest": "^27.0.1",
+        "@types/node": "^16.7.2",
+        "@typescript-eslint/eslint-plugin": "^4.29.3",
+        "@typescript-eslint/parser": "^4.29.3",
+        "chalk": "^4.1.2",
+        "concurrently": "^6.2.1",
+        "cross-env": "^7.0.3",
+        "eslint": "^7.32.0",
         "eslint-config-prettier": "^8.3.0",
-        "eslint-plugin-vue": "^7.13.0",
+        "eslint-plugin-promise": "^5.1.0",
+        "eslint-plugin-vue": "^7.16.0",
         "execa": "^5.1.1",
         "format-imports": "^2.4.1",
-        "husky": "^7.0.0",
+        "husky": "^7.0.2",
         "jest": "^27.0.6",
-        "lint-staged": "^11.0.1",
+        "lint-staged": "^11.1.2",
         "prettier": "^2.3.2",
+        "rimraf": "^3.0.2",
         "stylelint": "^13.13.1",
         "stylelint-config-prettier": "^8.0.2",
-        "stylelint-config-recess-order": "^2.4.0",
+        "stylelint-config-recess-order": "^2.5.0",
         "stylelint-config-standard": "^22.0.0",
-        "stylelint-declaration-block-no-ignored-properties": "^2.3.0",
-        "ts-jest": "^27.0.3",
-        "ts-node": "^10.1.0",
-        "typescript": "^4.3.5"
-    },
-    "dependencies": {
-        "electron": "^13.1.6"
+        "stylelint-declaration-block-no-ignored-properties": "^2.4.0",
+        "ts-jest": "^27.0.5",
+        "ts-node": "^10.2.1",
+        "typescript": "4.3.5"
     }
 }
