@@ -39,12 +39,6 @@ async function createWindow() {
             preload: path.resolve(__dirname, '../../preload/dist/index.js'),
         },
     });
-    const aeInstallDir = Storage.singleton.get('aeInstallDir');
-    log.info(
-        aeInstallDir
-            ? `AE installation directory: ${chalk.green(aeInstallDir)}`
-            : chalk.yellow('User has not set AE installation directory!'),
-    );
 
     // 需要 renderer 进程调用 common.quit 才能退出应用
     // let shouldQuit = false;

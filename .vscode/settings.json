@@ -2,6 +2,7 @@
     // stylelint 扩展自身的校验就够了
     "css.validate": false,
     "scss.validate": false,
+    "stylelint.validate": ["css", "less", "vue"],
     "typescript.tsdk": "node_modules/typescript/lib",
     "volar.codeLens.pugTools": false,
     "volar.codeLens.references": false,
