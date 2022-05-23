@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx lint-staged
-pnpm run build:main --filter app
-pnpm run type-check --filter app
+pnpm --filter app run build:main
+pnpm --filter app run type-check
