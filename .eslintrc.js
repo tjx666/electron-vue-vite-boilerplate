@@ -31,6 +31,7 @@ module.exports = {
     plugins: ['@typescript-eslint'],
     rules: {
         'vue/script-setup-uses-vars': ERROR,
+        'vue/multi-word-component-names': OFF,
 
         indent: [ERROR, 4, { SwitchCase: 1 }],
         quotes: [ERROR, 'single'],

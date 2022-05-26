@@ -18,6 +18,6 @@ defineProps<IconFontProps>();
     height: 1em;
     overflow: hidden;
     vertical-align: -0.15em;
-    fill: currentColor;
+    fill: currentcolor;
 }
 </style>

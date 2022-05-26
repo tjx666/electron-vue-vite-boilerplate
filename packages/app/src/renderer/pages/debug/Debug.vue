@@ -79,6 +79,7 @@ function handleCancelInfoModal() {
 <style lang="less">
 .debug-page {
     padding: 20px 10px 10px;
+
     .title {
         text-align: center;
     }

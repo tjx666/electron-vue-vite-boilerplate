@@ -7,11 +7,13 @@
     ],
     "plugins": ["stylelint-declaration-block-no-ignored-properties"],
     "rules": {
+        "alpha-value-notation": null,
+        "color-function-notation": ["legacy"],
         "comment-empty-line-before": null,
+        "declaration-empty-line-before": null,
         "function-name-case": "lower",
-        "no-invalid-double-slash-comments": null,
         "no-descending-specificity": null,
-        "declaration-empty-line-before": null
+        "no-invalid-double-slash-comments": null
     },
     "ignoreFiles": ["**/node_modules/**"]
 }
