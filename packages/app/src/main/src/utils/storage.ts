@@ -1,6 +1,7 @@
+import path from 'node:path';
+
 import { app, ipcMain } from 'electron';
 import fs from 'fs-extra';
-import path from 'path';
 import type { JsonValue } from 'type-fest';
 
 export default class Storage {
@@ -34,13 +35,13 @@ export default class Storage {
                 [key]: value,
             }),
             {
-                encoding: 'utf-8',
+                encoding: 'utf8',
             },
         );
         Reflect.set(this.store, key, value);
     }
 
     get<T extends JsonValue>(key: string): T {
-        return Reflect.get(this.store, key);
+        return Reflect.get(this.store, key) as T;
     }
 }

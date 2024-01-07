@@ -1,4 +1,4 @@
-import { Mutation } from 'vuex';
+import type { Mutation } from 'vuex';
 
 export enum MutationType {
     increment = 'increment',

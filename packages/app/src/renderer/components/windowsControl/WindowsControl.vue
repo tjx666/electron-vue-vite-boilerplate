@@ -1,14 +1,3 @@
-<template>
-    <div class="windows-control">
-        <icon-font class="icon-min" name="Minus" @click="handleMin" />
-        <icon-font
-            class="icon-full-screen"
-            :name="isFullScreen ? 'win-unfull' : 'full'"
-            @click="handleToggleFull"
-        />
-        <icon-font class="icon-close" name="win-close" @click="handleClose" />
-    </div>
-</template>
 <script lang="ts" setup>
 import { ref } from 'vue';
 
@@ -27,7 +16,20 @@ function handleClose() {
     ipcRenderer.invoke('common.windowsControl', 'close');
 }
 </script>
-<style lang="less">
+
+<template>
+    <div class="windows-control">
+        <icon-font class="icon-min" name="Minus" @click="handleMin" />
+        <icon-font
+            class="icon-full-screen"
+            :name="isFullScreen ? 'win-unfull' : 'full'"
+            @click="handleToggleFull"
+        />
+        <icon-font class="icon-close" name="win-close" @click="handleClose" />
+    </div>
+</template>
+
+<style>
 .windows-control {
     width: 76px;
     height: 24px;

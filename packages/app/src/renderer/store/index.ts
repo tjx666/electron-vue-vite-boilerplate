@@ -1,5 +1,6 @@
-import { InjectionKey } from 'vue';
-import { createStore, Store, useStore as baseUseStore } from 'vuex';
+import type { InjectionKey } from 'vue';
+import type { Store } from 'vuex';
+import { createStore, useStore as baseUseStore } from 'vuex';
 
 import type { Mutations } from './mutation-types';
 

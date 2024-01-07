@@ -1,5 +1,6 @@
+import fs from 'node:fs';
+
 import { ipcRenderer } from 'electron';
-import fs from 'fs';
 
 export async function getUserDataDir(): Promise<string> {
     return ipcRenderer.invoke('common.getUserDataDir');

@@ -5,11 +5,13 @@
 // Can be used for more than one window, just construct many
 // instances of it and give each different name.
 
-import { app, BrowserWindow, BrowserWindowConstructorOptions, Rectangle, screen } from 'electron';
-import fs from 'fs-extra';
-import path from 'path';
+import path from 'node:path';
 
-import { debounce } from './debounce';
+import type { BrowserWindowConstructorOptions, Rectangle } from 'electron';
+import { app, BrowserWindow, screen } from 'electron';
+import fs from 'fs-extra';
+
+import { debounce } from './debounce.js';
 
 interface WindowState {
     x: number;
@@ -41,6 +43,8 @@ export default async function createWindow(
         return Object.assign({}, defaultSize, savedState);
     };
 
+    // eslint-disable-next-line prefer-const
+    let win: BrowserWindow;
     const getCurrentPosition = () => {
         const position = win.getPosition();
         const size = win.getSize();
@@ -86,14 +90,14 @@ export default async function createWindow(
         ...options,
         ...state,
     };
-    const win = new BrowserWindow(mergedOptions);
+    win = new BrowserWindow(mergedOptions);
 
     const saveState = debounce(() => {
         if (!win.isMinimized() && !win.isMaximized()) {
             Object.assign(state, getCurrentPosition());
         }
         const stateJson = JSON.stringify(state);
-        fs.writeFile(stateStoreFile, stateJson, 'utf-8', (error) => {
+        fs.writeFile(stateStoreFile, stateJson, 'utf8', (error) => {
             if (error) {
                 console.error('save window state failed!', `state: ${stateJson}`);
             }

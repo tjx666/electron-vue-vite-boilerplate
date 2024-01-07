@@ -1,9 +1,10 @@
+import os from 'node:os';
+
 import { app, BrowserWindow, dialog } from 'electron';
 import isOnline from 'is-online';
-import os from 'os';
 
-import { DEV_MODE, isMacOS } from '../utils/constants';
-import { handle } from './register';
+import { handle } from './register.js';
+import { DEV_MODE, isMacOS } from '../utils/constants.js';
 
 export default function registerUniversalHandlers() {
     /**
@@ -44,16 +45,33 @@ export default function registerUniversalHandlers() {
         const win = BrowserWindow.getFocusedWindow();
         if (!win) return;
 
-        if (action === 'min') {
-            win.minimize();
-        } else if (action === 'max') {
-            win.maximize();
-        } else if (action === 'close') {
-            win.close();
-        } else if (action === 'unMax') {
-            win.unmaximize();
-        } else if (action === 'toggleFull') {
-            win.setFullScreen(!win.isFullScreen());
+        switch (action) {
+            case 'min': {
+                win.minimize();
+
+                break;
+            }
+            case 'max': {
+                win.maximize();
+
+                break;
+            }
+            case 'close': {
+                win.close();
+
+                break;
+            }
+            case 'unMax': {
+                win.unmaximize();
+
+                break;
+            }
+            case 'toggleFull': {
+                win.setFullScreen(!win.isFullScreen());
+
+                break;
+            }
+            // No default
         }
     });
 

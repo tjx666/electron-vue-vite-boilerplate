@@ -1,5 +1,6 @@
 import chalk from 'chalk';
-import { ipcMain, IpcMainInvokeEvent } from 'electron';
+import type { IpcMainInvokeEvent } from 'electron';
+import { ipcMain } from 'electron';
 import log from 'electron-log';
 
 const highlight = chalk.magentaBright.italic;

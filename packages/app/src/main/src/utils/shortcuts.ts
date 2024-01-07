@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron';
 import localShortcut from 'electron-localshortcut';
 
-import { isMacOS } from './constants';
+import { isMacOS } from './constants.js';
 
 export function registerDevShortcuts() {
     localShortcut.register('CommandOrControl+R', () => {

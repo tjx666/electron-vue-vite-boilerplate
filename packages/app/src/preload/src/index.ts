@@ -1,8 +1,5 @@
-import dateFormat from 'dateformat';
-import { contextBridge, ipcRenderer, IpcRenderer } from 'electron';
-import log, { LogMessage } from 'electron-log';
-import stripAnsi from 'strip-ansi';
-import type { PromiseValue } from 'type-fest';
+import { contextBridge, ipcRenderer } from 'electron';
+import log from 'electron-log';
 
 import getEnv from './env';
 import * as fs from './fs';
@@ -29,23 +26,25 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 });
 contextBridge.exposeInMainWorld('log', log.functions);
 log.transports.console.format = '{text}';
-log.transports.ipc = null;
-log.transports.file.format = (message: LogMessage) => {
-    const str = message.data
-        .map((item) => {
-            if (item !== null && typeof item === 'object') {
-                return item.toString();
-            }
-            return String(item);
-        })
-        .join(' ');
-    const dateStr = dateFormat(message.date, 'yyyy-mm-dd HH:MM:ss.l');
-    return `[${dateStr}] [${message.level.toUpperCase()}] ${stripAnsi(str)}`;
-};
+// log.transports.ipc = null;
+// log.transports.file.format = (message: LogMessage) => {
+//     const str = message.data
+//         .map((item) => {
+//             if (item !== null && typeof item === 'object') {
+//                 return item.toString();
+//             }
+//             return String(item);
+//         })
+//         .join(' ');
+//     const dateStr = dateFormat(message.date, 'yyyy-mm-dd HH:MM:ss.l');
+//     return `[${dateStr}] [${message.level.toUpperCase()}] ${stripAnsi(str)}`;
+// };
 const preloadInitialization = injectApi();
 contextBridge.exposeInMainWorld('preloadInitialization', preloadInitialization);
 
-type Api = PromiseValue<ReturnType<typeof injectApi>>;
+type Api = Awaited<ReturnType<typeof injectApi>>;
 type PreloadInitialization = ReturnType<typeof injectApi>;
 type ElectronLog = typeof log;
-export type { Api, ElectronLog, IpcRenderer, PreloadInitialization };
+export type { Api, ElectronLog, PreloadInitialization };
+
+export { type IpcRenderer } from 'electron';

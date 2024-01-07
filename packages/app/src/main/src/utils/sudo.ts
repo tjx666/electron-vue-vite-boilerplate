@@ -21,6 +21,7 @@ export default function sudo(commandStr: string, options?: SudoOptions) {
             if (error) {
                 reject(error);
             } else {
+                // eslint-disable-next-line unicorn/no-useless-undefined
                 resolve(undefined);
             }
         });

@@ -1,4 +1,4 @@
-import registerUniversalHandlers from './universal';
+import registerUniversalHandlers from './universal.js';
 
 export default function registerHandlers(): void {
     registerUniversalHandlers();

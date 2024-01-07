@@ -1,16 +1,15 @@
-import chalk from 'chalk';
-import dateFormat from 'dateformat';
-import { app, BrowserWindow } from 'electron';
-import log, { LogMessage } from 'electron-log';
-import path from 'path';
-import stripAnsi from 'strip-ansi';
+import path from 'node:path';
 
-import registerHandlers from './events';
-import { isDev, isMacOS } from './utils/constants';
-import setMenu from './utils/menu';
-import { registerDevShortcuts } from './utils/shortcuts';
-import Storage from './utils/storage';
-import createKeepStateBrowserWindow from './utils/window';
+import chalk from 'chalk';
+import { app, BrowserWindow } from 'electron';
+import log from 'electron-log';
+
+import registerHandlers from './events/index.js';
+import { isDev, isMacOS, appRoot } from './utils/constants.js';
+import setMenu from './utils/menu.js';
+import { registerDevShortcuts } from './utils/shortcuts.js';
+import Storage from './utils/storage.js';
+import createKeepStateBrowserWindow from './utils/window.js';
 
 let win: BrowserWindow | undefined;
 
@@ -36,7 +35,8 @@ async function createWindow() {
         titleBarStyle: 'hidden',
         frame: isMacOS,
         webPreferences: {
-            preload: path.resolve(__dirname, '../../preload/dist/index.js'),
+            sandbox: false,
+            preload: path.resolve(appRoot, 'src/preload/dist/index.js'),
         },
     });
 
@@ -58,10 +58,10 @@ async function createWindow() {
     // });
 
     if (isDev) {
-        mainWindow.loadURL('http://localhost:3000');
+        mainWindow.loadURL('http://localhost:5173');
         mainWindow.webContents.openDevTools();
     } else {
-        mainWindow.loadFile(path.resolve(__dirname, '../../renderer/dist/index.html'));
+        mainWindow.loadFile(path.resolve(appRoot, 'src/renderer/dist/index.html'));
     }
 
     return mainWindow;
@@ -71,23 +71,23 @@ function configElectronLog() {
     // 未捕获的异常会弹窗提示
     log.catchErrors();
     log.transports.console.format = '{text}';
-    log.transports.ipc = null;
-    log.transports.file.format = (message: LogMessage) => {
-        const str = message.data
-            .map((item) => {
-                if (item !== null && typeof item === 'object') {
-                    return item.toString();
-                }
-                return String(item);
-            })
-            .join(' ');
-        const dateStr = dateFormat(message.date, 'yyyy-mm-dd HH:MM:ss.l');
-        return `[${dateStr}] [${message.level.toUpperCase()}] ${stripAnsi(str)}`;
-    };
+    // log.transports.ipc = null;
+    // log.transports.file.format = (message: LogMessage) => {
+    //     const str = message.data
+    //         .map((item) => {
+    //             if (item !== null && typeof item === 'object') {
+    //                 return item.toString();
+    //             }
+    //             return String(item);
+    //         })
+    //         .join(' ');
+    //     const dateStr = dateFormat(message.date, 'yyyy-mm-dd HH:MM:ss.l');
+    //     return `[${dateStr}] [${message.level.toUpperCase()}] ${stripAnsi(str)}`;
+    // };
 }
 
 app.whenReady().then(async () => {
-    process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+    process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
     configElectronLog();
     const env = process.env.DEV_MODE;
     log.info(`Application running under ${chalk.bold.green(env)} mode!`);
@@ -106,6 +106,6 @@ app.whenReady().then(async () => {
     });
 });
 
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });

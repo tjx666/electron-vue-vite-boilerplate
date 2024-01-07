@@ -1,9 +1,10 @@
-import { spawn } from 'child_process';
+import { spawn } from 'node:child_process';
+import { resolve } from 'node:path';
+
 import electron from 'electron';
-import { resolve } from 'path';
 
 import { buildMain } from './build-main';
-import { waitOnHttpPage } from './utils';
+import { waitOnHttpPage, __dirname } from './utils';
 
 async function main() {
     const rootDir = resolve(__dirname, '../');

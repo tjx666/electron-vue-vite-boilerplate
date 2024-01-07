@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+
+const info = ref<Record<string, string>>({});
+const showInfoModal = ref(false);
+const chineseDevModeName = computed(() => {
+    if (info.value.devMode) {
+        const mapper: Record<string, string> = {
+            development: '开发模式',
+            test: '测试模式',
+            production: '生产模式',
+        };
+        return mapper[info.value.devMode as string];
+    }
+    return '';
+});
+
+async function checkVersionInfo() {
+    info.value = await ipcRenderer.invoke('common.app.about');
+    showInfoModal.value = true;
+}
+
+function handleCancelInfoModal() {
+    showInfoModal.value = false;
+}
+</script>
+
 <template>
     <div class="debug-page">
         <h2 class="title">调试页</h2>
@@ -49,34 +76,7 @@
     </div>
 </template>
 
-<script setup lang="ts">
-import { computed, ref } from 'vue';
-
-const info = ref<Record<string, string>>({});
-const showInfoModal = ref(false);
-const chineseDevModeName = computed(() => {
-    if (info.value.devMode) {
-        const mapper: Record<string, string> = {
-            development: '开发模式',
-            test: '测试模式',
-            production: '生产模式',
-        };
-        return mapper[info.value.devMode as string];
-    }
-    return '';
-});
-
-async function checkVersionInfo() {
-    info.value = await ipcRenderer.invoke('common.app.about');
-    showInfoModal.value = true;
-}
-
-function handleCancelInfoModal() {
-    showInfoModal.value = false;
-}
-</script>
-
-<style lang="less">
+<style>
 .debug-page {
     padding: 20px 10px 10px;
 

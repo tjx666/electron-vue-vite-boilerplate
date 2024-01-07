@@ -1,6 +1,6 @@
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 
-import { runCommandWithOutput } from './utils';
+import { runCommandWithOutput, __dirname } from './utils';
 
 export async function buildMain(debug = false) {
     const rootDir = resolve(__dirname, '../');
@@ -22,6 +22,6 @@ export async function buildMain(debug = false) {
     ]);
 }
 
-if (require.main === module) {
+if (import.meta.url.endsWith(process.argv[1])) {
     buildMain();
 }

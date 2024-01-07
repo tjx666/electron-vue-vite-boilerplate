@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 
-import sudo from './sudo';
+import sudo from './sudo.js';
 
 export async function pathWritable(path: string) {
     try {

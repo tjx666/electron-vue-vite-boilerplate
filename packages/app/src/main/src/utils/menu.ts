@@ -1,6 +1,7 @@
-import { app, Menu, MenuItem, MenuItemConstructorOptions, shell } from 'electron';
+import type { MenuItem, MenuItemConstructorOptions } from 'electron';
+import { app, Menu, shell } from 'electron';
 
-import { isMacOS } from './constants';
+import { isMacOS } from './constants.js';
 
 type MenuTemplet = Array<MenuItemConstructorOptions | MenuItem>;
 

@@ -1,9 +1,3 @@
-<template>
-    <svg class="icon" aria-hidden="true" :style="size ? { fontSize: Number(size) } : {}">
-        <use :xlink:href="`#icon-${name}`"></use>
-    </svg>
-</template>
-
 <script lang="ts" setup>
 interface IconFontProps {
     name: string;
@@ -12,7 +6,13 @@ interface IconFontProps {
 defineProps<IconFontProps>();
 </script>
 
-<style lang="less">
+<template>
+    <svg class="icon" aria-hidden="true" :style="size ? { fontSize: Number(size) } : {}">
+        <use :xlink:href="`#icon-${name}`"></use>
+    </svg>
+</template>
+
+<style >
 .icon {
     width: 1em;
     height: 1em;
