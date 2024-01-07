@@ -10,19 +10,7 @@
         "esModuleInterop": true,
         "lib": ["esnext", "dom"],
         "baseUrl": "./",
-        "types": ["vite/client"],
-        "paths": {
-            "@/*": ["*"],
-            "apis/*": ["apis/*"],
-            "assets/*": ["assets/*"],
-            "components/*": ["components/*"],
-            "mock/*": ["mock/*"],
-            "models/*": ["models/*"],
-            "pages/*": ["pages/*"],
-            "store/*": ["store/*"],
-            "typings/*": ["typings/*"],
-            "utils/*": ["utils/*"]
-        }
+        "types": ["vite/client"]
     },
     "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "vite.config.mts"]
 }

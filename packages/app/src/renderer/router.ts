@@ -1,5 +1,6 @@
-import DebugPage from 'pages/debug/Debug.vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
+
+import DebugPage from './pages/Debug.vue';
 
 const routes = [{ path: '/', component: DebugPage }];
 

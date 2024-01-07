@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Button, Modal } from 'ant-design-vue';
 import { computed, ref } from 'vue';
 
 const info = ref<Record<string, string>>({});
@@ -28,10 +29,10 @@ function handleCancelInfoModal() {
 <template>
     <div class="debug-page">
         <h2 class="title">调试页</h2>
-        <a-button @click="checkVersionInfo">查看版本信息</a-button>
-        <a-modal
+        <Button @click="checkVersionInfo">查看版本信息</Button>
+        <Modal
             class="debug-info-modal"
-            :visible="showInfoModal"
+            :open="showInfoModal"
             :width="600"
             :footer="null"
             @cancel="handleCancelInfoModal"
@@ -72,7 +73,7 @@ function handleCancelInfoModal() {
                 <span>Node 版本: </span>
                 <span>{{ info.nodeVersion }}</span>
             </div>
-        </a-modal>
+        </Modal>
     </div>
 </template>
 

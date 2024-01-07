@@ -23,7 +23,7 @@ export const store = createStore<State>({
     mutations,
 });
 
-export const key: InjectionKey<Store<State>> = Symbol();
+export const key: InjectionKey<Store<State>> = Symbol('Vuex Store');
 export function useStore() {
     return baseUseStore(key);
 }

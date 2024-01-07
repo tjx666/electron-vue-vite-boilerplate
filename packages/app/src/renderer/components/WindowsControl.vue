@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
+import IconFont from './IconFont.vue';
+
 const isFullScreen = ref(false);
 
 function handleMin() {
@@ -19,13 +21,13 @@ function handleClose() {
 
 <template>
     <div class="windows-control">
-        <icon-font class="icon-min" name="Minus" @click="handleMin" />
-        <icon-font
+        <IconFont class="icon-min" name="Minus" @click="handleMin" />
+        <IconFont
             class="icon-full-screen"
             :name="isFullScreen ? 'win-unfull' : 'full'"
             @click="handleToggleFull"
         />
-        <icon-font class="icon-close" name="win-close" @click="handleClose" />
+        <IconFont class="icon-close" name="win-close" @click="handleClose" />
     </div>
 </template>
 
