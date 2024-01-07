@@ -1,18 +1,21 @@
 {
-    // stylelint 扩展自身的校验就够了
     "css.validate": false,
     "scss.validate": false,
     "stylelint.validate": ["css", "vue"],
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+        "json",
+        "html",
+        "markdown"
+    ],
     "typescript.tsdk": "node_modules/typescript/lib",
     "search.exclude": {
-        "**/node_modules": true,
-        "pnpm-lock.yaml": true,
-        "**/dist": true
-    },
-    "files.watcherExclude": {
-        "**/.git/objects/**": true,
-        "**/.git/subtree-cache/**": true,
-        "**/node_modules/**": true
+        "**/dist": true,
+        "pnpm-lock.yaml": true
     },
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -33,13 +36,6 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-
-    "[scss]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[markdown]": {
