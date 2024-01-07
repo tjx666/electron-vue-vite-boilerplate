@@ -7,21 +7,24 @@
         "vue",
         "vite",
         "boilerplate",
-        "templet"
+        "template",
+        "ant-design-vue"
     ],
     "eslintConfig": {
         "extends": "@yutengjing/eslint-config-vue"
     },
     "prettier": "@yutengjing/prettier-config",
     "scripts": {
+        "dev": "pnpm --filter app start",
         "main": "pnpm --filter app start:main",
-        "renderer": "pnpm --filter app start:renderer",
-        "app": "pnpm --filter app start"
+        "renderer": "pnpm --filter app start:renderer"
     },
     "devDependencies": {
         "@types/node": "^20.10.6",
         "@yutengjing/eslint-config-vue": "^0.4.2",
         "@yutengjing/prettier-config": "^1.0.0",
+        "@yutengjing/tsconfig-node": "0.0.3",
+        "@yutengjing/tsconfig-vue": "0.0.4",
         "concurrently": "^8.2.2",
         "cross-env": "^7.0.3",
         "eslint": "^8.56.0",

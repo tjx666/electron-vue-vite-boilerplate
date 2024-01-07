@@ -1,16 +1,4 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "moduleResolution": "node",
-        "strict": true,
-        "jsx": "preserve",
-        "sourceMap": true,
-        "resolveJsonModule": true,
-        "esModuleInterop": true,
-        "lib": ["esnext", "dom"],
-        "baseUrl": "./",
-        "types": ["vite/client"]
-    },
+    "extends": "@yutengjing/tsconfig-vue",
     "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "vite.config.mts"]
 }
