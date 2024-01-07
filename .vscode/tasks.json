@@ -3,7 +3,7 @@
     "tasks": [
         {
             "label": "compileForDebugAppMain",
-            "command": "ts-node",
+            "command": "tsx",
             "type": "shell",
             "args": ["./scripts/pre-vscode-debug.ts"],
             "presentation": {

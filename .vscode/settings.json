@@ -2,15 +2,8 @@
     // stylelint 扩展自身的校验就够了
     "css.validate": false,
     "scss.validate": false,
-    "stylelint.validate": ["css", "less", "vue"],
+    "stylelint.validate": ["css", "vue"],
     "typescript.tsdk": "node_modules/typescript/lib",
-    "volar.codeLens.pugTools": false,
-    "volar.codeLens.references": false,
-    "volar.codeLens.scriptSetupTools": false,
-    "volar.icon.splitEditors": false,
-    "volar.tsPlugin": true,
-    "volar.icon.preview": true,
-    "volar.icon.finder": true,
     "search.exclude": {
         "**/node_modules": true,
         "pnpm-lock.yaml": true,
@@ -42,9 +35,7 @@
     "[css]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[less]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
+
     "[scss]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
