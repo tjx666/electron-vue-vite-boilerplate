@@ -8,6 +8,5 @@ declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
         $store: Store<State>;
         $message: typeof message;
-        $storage: typeof window.api.storage;
     }
 }

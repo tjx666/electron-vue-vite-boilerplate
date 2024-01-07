@@ -36,11 +36,11 @@ function handleClose() {
 
     .icon {
         font-size: 24px;
-        color: rgba(127, 135, 146, 1);
+        color: rgb(127 135 146 / 100%);
         -webkit-app-region: no-drag;
 
         &:hover {
-            color: rgba(28, 30, 32, 1);
+            color: rgb(28 30 32 / 100%);
         }
 
         &:not(:last-child) {

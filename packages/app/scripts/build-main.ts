@@ -14,8 +14,14 @@ export async function buildMain(debug = false) {
     await runCommandWithOutput(cleanCommand);
 
     // compile main and preload typescript
-    const compileMainCommand = `npx tsc -p ${mainDir} ${debug ? '--sourceMap' : ''}`;
-    const compilePreloadCommand = `npx tsc -p ${preloadDir}`;
+    // const compileMainCommand = `npx tsc -p ${mainDir} ${debug ? '--sourceMap' : ''}`;
+    // const compilePreloadCommand = `npx tsc -p ${preloadDir}`;
+    const compileMainCommand = `esbuild ./src/main/src/index.ts --bundle --outfile=src/main/dist/index.js --external:electron --format=cjs --platform=node ${
+        debug ? '--sourceMap' : ''
+    }`;
+    const compilePreloadCommand = `esbuild ./src/preload/src/index.ts --bundle --outfile=src/preload/dist/index.js --external:electron --format=cjs --platform=node ${
+        debug ? '--sourceMap' : ''
+    }`;
     await Promise.all([
         runCommandWithOutput(compileMainCommand),
         runCommandWithOutput(compilePreloadCommand),

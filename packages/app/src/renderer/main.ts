@@ -28,26 +28,23 @@ import 'ant-design-vue/es/badge/style';
 
 // import './assets/js/iconfont-symbol';
 
-preloadInitialization.then(() => {
-    const app = createApp(App);
-    app.use(store, storeKey);
-    app.use(router);
+const app = createApp(App);
+app.use(store, storeKey);
+app.use(router);
 
-    // config antd
-    (app.config as any).productionTip = false;
-    app.config.globalProperties.$message = message;
-    app.config.globalProperties.$storage = api.storage;
-    app.use(Button)
-        .use(Divider)
-        .use(Dropdown)
-        .use(Icon)
-        .use(Input)
-        .use(Menu)
-        .use(Modal)
-        .use(Progress)
-        .use(Badge)
-        .use(Spin);
-    app.component('IconFont', IconFont);
+// config antd
+(app.config as any).productionTip = false;
+app.config.globalProperties.$message = message;
+app.use(Button)
+    .use(Divider)
+    .use(Dropdown)
+    .use(Icon)
+    .use(Input)
+    .use(Menu)
+    .use(Modal)
+    .use(Progress)
+    .use(Badge)
+    .use(Spin);
+app.component('IconFont', IconFont);
 
-    app.mount('#root');
-});
+app.mount('#root');

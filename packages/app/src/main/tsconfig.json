@@ -3,7 +3,7 @@
     "compilerOptions": {
         "outDir": "./dist",
         "baseUrl": "./src",
-        "module": "NodeNext",
-        "moduleResolution": "NodeNext"
+        "module": "ESNext",
+        "moduleResolution": "Bundler"
     }
 }

@@ -2,7 +2,6 @@
     "name": "app",
     "version": "1.0.0",
     "productName": "electron-vue-vite-boilerplate",
-    "type": "module",
     "main": "src/main/dist/index.js",
     "scripts": {
         "start": "cross-env DEV_MODE=development concurrently -r -i --kill-others-on-fail npm:start:renderer npm:start:main",
@@ -41,6 +40,7 @@
         "electron-builder": "^24.9.1",
         "electron-devtools-installer": "^3.2.0",
         "enquirer": "^2.4.1",
+        "esbuild": "0.19.11",
         "execa": "^8.0.1",
         "less": "^4.2.0",
         "type-fest": "^4.9.0",

@@ -2,7 +2,7 @@ import path from 'node:path';
 
 import chalk from 'chalk';
 import { app, BrowserWindow } from 'electron';
-import log from 'electron-log';
+import logger from 'electron-log/main';
 
 import registerHandlers from './events/index.js';
 import { isDev, isMacOS, appRoot } from './utils/constants.js';
@@ -69,8 +69,8 @@ async function createWindow() {
 
 function configElectronLog() {
     // 未捕获的异常会弹窗提示
-    log.catchErrors();
-    log.transports.console.format = '{text}';
+    logger.catchErrors();
+    logger.transports.console.format = '{text}';
     // log.transports.ipc = null;
     // log.transports.file.format = (message: LogMessage) => {
     //     const str = message.data
@@ -90,7 +90,7 @@ app.whenReady().then(async () => {
     process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
     configElectronLog();
     const env = process.env.DEV_MODE;
-    log.info(`Application running under ${chalk.bold.green(env)} mode!`);
+    logger.info(`Application running under ${chalk.bold.green(env)} mode!`);
 
     setMenu();
     registerHandlers();
