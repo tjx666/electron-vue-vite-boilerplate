@@ -1,12 +1,18 @@
 import { get } from 'node:http';
-import { dirname } from 'node:path';
+import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import chalk from 'chalk';
 import type { Options as CommandOptions } from 'execa';
 import { execaCommand } from 'execa';
 
+export type Environment = 'development' | 'test' | 'production';
+
 export const __dirname = dirname(fileURLToPath(import.meta.url));
+export const rootDir = resolve(__dirname, '../');
+export const mainDir = resolve(rootDir, 'src/main');
+export const preloadDir = resolve(rootDir, 'src/preload');
+export const envFilePath = resolve(mainDir, './dist/.env');
 
 export function waitOnHttpPage(port = 5173, interval = 100) {
     return new Promise((resolve) => {

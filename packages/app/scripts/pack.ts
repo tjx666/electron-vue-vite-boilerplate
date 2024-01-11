@@ -3,10 +3,13 @@ import path from 'node:path';
 
 import chalk from 'chalk';
 import dateFormat from 'dateformat';
-import { prompt } from 'enquirer';
+import Enquirer from 'enquirer';
 import fs from 'fs-extra';
 
-import { runCommandWithOutput } from './utils';
+import { buildMain } from './build-main';
+import { __dirname, runCommandWithOutput, type Environment, envFilePath } from './utils';
+
+const { prompt } = Enquirer;
 
 async function build(system: string, env: string) {
     const buildInfo = `\n 即将构建 ${chalk.cyanBright(system)} 系统 ${chalk.cyanBright(
@@ -14,22 +17,23 @@ async function build(system: string, env: string) {
     )} 包`;
     console.log(buildInfo);
     const cwd = path.resolve(__dirname, '../');
-    await runCommandWithOutput('pnpm build:renderer', { cwd });
-    await runCommandWithOutput('pnpm build:main', { cwd });
-    const envFilePath = path.resolve(__dirname, '../src/main/src/.env');
-    const devEnvContent = await fs.readFile(envFilePath, { encoding: 'utf8' });
+    await Promise.all([
+        runCommandWithOutput('pnpm build:renderer', { cwd }),
+        buildMain(false, env as Environment),
+    ]);
+
+    const dotEnvContent = await fs.readFile(envFilePath, { encoding: 'utf8' });
     const latestGitCommit = childPrecess
         .execSync('git rev-parse HEAD', { cwd: __dirname })
         .toString()
         .trim();
     const dateTime = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss.l');
-    const packedEnvContent =
-        `${devEnvContent.replace(
-            'DEV_MODE=development',
-            `DEV_MODE=${env}`,
-        )}\nPACK_GIT_COMMIT=${latestGitCommit}` + `\nPACK_DATE_TIME=${dateTime}`;
-    const envFilePathInDist = path.resolve(__dirname, '../src/main/dist/.env');
-    await fs.writeFile(envFilePathInDist, packedEnvContent);
+    const packedEnvContent = [
+        dotEnvContent,
+        `PACK_GIT_COMMIT=${latestGitCommit}`,
+        `PACK_DATE_TIME=${dateTime}`,
+    ].join('\n');
+    await fs.writeFile(envFilePath, packedEnvContent);
     await runCommandWithOutput(`npx electron-builder build -${system === 'MacOS' ? 'm' : 'w'}`, {
         cwd,
     });

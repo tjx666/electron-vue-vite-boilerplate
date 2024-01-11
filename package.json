@@ -19,10 +19,12 @@
     "prettier": "@yutengjing/prettier-config",
     "scripts": {
         "dev": "pnpm --filter app start",
+        "build": "pnpm --filter app build:app",
         "main": "pnpm --filter app start:main",
         "renderer": "pnpm --filter app start:renderer"
     },
     "devDependencies": {
+        "@electron/asar": "^3.2.8",
         "@types/node": "^20.10.6",
         "@yutengjing/eslint-config-vue": "^0.4.2",
         "@yutengjing/prettier-config": "^1.0.0",

@@ -50,12 +50,6 @@
     "build": {
         "appId": "org.ytj.electron-vue-vite-boilerplate",
         "files": [
-            "node_modules/",
-            "!**/node_modules/**/{license,LICENSE,license.md,LICENSE.md}",
-            "!**/node_modules/**/{history,HISTORY,history.md,HISTORY.md}",
-            "!**/node_modules/**/{readme,README,readme.md,README.md}",
-            "!**/node_modules/**/*.{test,spec}.js",
-            "!**/node_modules/**/*.ts",
             "src/main/dist/",
             "src/preload/dist/",
             "src/renderer/dist/",
