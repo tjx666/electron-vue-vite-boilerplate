@@ -1,8 +1,11 @@
 import path from 'node:path';
 
 import chalk from 'chalk';
+import dateFormat from 'dateformat';
 import { app, BrowserWindow } from 'electron';
+import type { LogMessage } from 'electron-log';
 import logger from 'electron-log/main';
+import stripAnsi from 'strip-ansi';
 
 import registerHandlers from './events/index.js';
 import { isDev, isMacOS, appRoot } from './utils/constants.js';
@@ -13,7 +16,7 @@ import createKeepStateBrowserWindow from './utils/window.js';
 
 let win: BrowserWindow | undefined;
 
-// 防止出现多实例
+// prevent open multiple apps
 const gotTheLock = app.requestSingleInstanceLock();
 if (!gotTheLock) {
     app.quit();
@@ -35,7 +38,6 @@ async function createWindow() {
         titleBarStyle: 'hidden',
         frame: isMacOS,
         webPreferences: {
-            sandbox: false,
             preload: path.resolve(appRoot, 'src/preload/dist/index.js'),
         },
     });
@@ -68,29 +70,26 @@ async function createWindow() {
 }
 
 function configElectronLog() {
-    // 未捕获的异常会弹窗提示
-    logger.catchErrors();
+    logger.errorHandler.startCatching();
+    logger.eventLogger.startLogging();
+    // easily to read
     logger.transports.console.format = '{text}';
-    // log.transports.ipc = null;
-    // log.transports.file.format = (message: LogMessage) => {
-    //     const str = message.data
-    //         .map((item) => {
-    //             if (item !== null && typeof item === 'object') {
-    //                 return item.toString();
-    //             }
-    //             return String(item);
-    //         })
-    //         .join(' ');
-    //     const dateStr = dateFormat(message.date, 'yyyy-mm-dd HH:MM:ss.l');
-    //     return `[${dateStr}] [${message.level.toUpperCase()}] ${stripAnsi(str)}`;
-    // };
+    logger.transports.file.format = ({ message }: { message: LogMessage }) => {
+        const str = message.data
+            .map((item) => {
+                const isObject = item !== null && typeof item === 'object';
+                return isObject ? item.toString() : String(item);
+            })
+            .join(' ');
+        const dateStr = dateFormat(message.date, 'yyyy-mm-dd HH:MM:ss.l');
+        return [`[${dateStr}] [${message.level.toUpperCase()}] ${stripAnsi(str)}`];
+    };
 }
 
 app.whenReady().then(async () => {
     process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true';
     configElectronLog();
-    const env = process.env.DEV_MODE;
-    logger.info(`Application running under ${chalk.bold.green(env)} mode!`);
+    logger.info(`Application running under ${chalk.bold.green(process.env.DEV_MODE)} mode!`);
 
     setMenu();
     registerHandlers();

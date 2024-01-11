@@ -3,9 +3,9 @@
     "tasks": [
         {
             "label": "compileForDebugAppMain",
-            "command": "tsx",
+            "command": "npx",
             "type": "shell",
-            "args": ["./scripts/pre-vscode-debug.ts"],
+            "args": ["tsx", "./scripts/pre-vscode-debug.ts"],
             "presentation": {
                 "reveal": "always"
             },

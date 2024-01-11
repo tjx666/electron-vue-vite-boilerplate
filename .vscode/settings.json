@@ -17,6 +17,20 @@
         "**/dist": true,
         "pnpm-lock.yaml": true
     },
+    "logViewer.watch": [
+        {
+            "title": "Mac Main",
+            "pattern": "${userHome}/Library/Logs/electron-vue-vite-boilerplate/main.log"
+        },
+        {
+            "title": "Win Main",
+            "pattern": "${userHome}/AppData/Roaming/electron-vue-vite-boilerplate/logs/main.log"
+        },
+        {
+            "title": "Linux Main",
+            "pattern": "${userHome}/.config/electron-vue-vite-boilerplate/logs/main.log"
+        }
+    ],
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },

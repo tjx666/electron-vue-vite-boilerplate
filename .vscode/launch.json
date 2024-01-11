@@ -2,37 +2,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "App: Main",
             "type": "node",
             "request": "launch",
-            "name": "App: Main",
-            "protocol": "inspector",
-            "cwd": "${workspaceFolder}/packages/app",
             "preLaunchTask": "compileForDebugAppMain",
+            "cwd": "${workspaceFolder}/packages/app",
             "env": {
                 "DEV_MODE": "true"
             },
             "runtimeExecutable": "${cwd}/node_modules/.bin/electron",
-            "runtimeArgs": ["."],
+            "args": ["."],
             "windows": {
                 "runtimeExecutable": "${cwd}/node_modules/.bin/electron.cmd"
             },
+            "outputCapture": "std",
             "sourceMaps": true
-        },
-        {
-            "name": "App: Renderer",
-            "type": "chrome",
-            "request": "launch",
-            "cwd": "${workspaceFolder}/packages/app",
-            "preLaunchTask": "compileForDebugAppMain",
-            "env": {
-                "DEV_MODE": "true"
-            },
-            "runtimeExecutable": "${cwd}/node_modules/.bin/electron",
-            "windows": {
-                "runtimeExecutable": "${cwd}/node_modules/.bin/electron"
-            },
-            "runtimeArgs": [".", "--remote-debugging-port=9222"],
-            "webRoot": "${cwd}/src/renderer"
         }
     ]
 }
