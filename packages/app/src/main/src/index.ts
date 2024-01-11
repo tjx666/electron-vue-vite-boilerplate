@@ -8,7 +8,7 @@ import logger from 'electron-log/main';
 import stripAnsi from 'strip-ansi';
 
 import registerHandlers from './events/index.js';
-import { isDev, isMacOS, appRoot } from './utils/constants.js';
+import { isDev, appRoot } from './utils/constants.js';
 import setMenu from './utils/menu.js';
 import { registerDevShortcuts } from './utils/shortcuts.js';
 import Storage from './utils/storage.js';
@@ -35,8 +35,6 @@ async function createWindow() {
         height: 670,
         minWidth: 1024,
         minHeight: 670,
-        titleBarStyle: 'hidden',
-        frame: isMacOS,
         webPreferences: {
             preload: path.resolve(appRoot, 'src/preload/dist/index.js'),
         },
