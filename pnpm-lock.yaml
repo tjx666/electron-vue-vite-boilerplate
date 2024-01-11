@@ -17,6 +17,9 @@ importers:
       '@yutengjing/prettier-config':
         specifier: ^1.0.0
         version: 1.0.0(prettier@3.1.1)
+      '@yutengjing/stylelint-config-vue':
+        specifier: ^0.1.0
+        version: 0.1.0(postcss-html@1.5.0)(stylelint@16.1.0)
       '@yutengjing/tsconfig-node':
         specifier: 0.0.3
         version: 0.0.3(@types/node@20.10.6)
@@ -1562,6 +1565,33 @@ packages:
       prettier-plugin-jsdoc: 1.3.0(prettier@3.1.1)
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@yutengjing/stylelint-config-basic@0.1.0(stylelint@16.1.0):
+    resolution: {integrity: sha512-jemDc92ok5qBxjRLXDOHdszm3BLBzBM+OXSTcsqWWLl2W3L0bV0JqOfkOuJgvOyAYve+YKUZ3KngQfoNJV4wtQ==}
+    peerDependencies:
+      stylelint: ^16
+    dependencies:
+      postcss-html: 1.5.0
+      stylelint: 16.1.0(typescript@5.3.3)
+      stylelint-config-html: 1.1.0(postcss-html@1.5.0)(stylelint@16.1.0)
+      stylelint-config-recess-order: 4.4.0(stylelint@16.1.0)
+      stylelint-config-standard: 36.0.0(stylelint@16.1.0)
+      stylelint-declaration-block-no-ignored-properties: 2.8.0(stylelint@16.1.0)
+      stylelint-define-config: 1.1.0(stylelint@16.1.0)
+    dev: true
+
+  /@yutengjing/stylelint-config-vue@0.1.0(postcss-html@1.5.0)(stylelint@16.1.0):
+    resolution: {integrity: sha512-y6tNPkY5jjtcdetN+YPFbRI1xejDTPqpJ6LZX35f2iVL7/tFrOE2ZaaPJ0gAtv0A2TjTEtMEX7oaNocdXXGcIw==}
+    peerDependencies:
+      stylelint: ^16
+    dependencies:
+      '@yutengjing/stylelint-config-basic': 0.1.0(stylelint@16.1.0)
+      stylelint: 16.1.0(typescript@5.3.3)
+      stylelint-config-recommended-vue: 1.5.0(postcss-html@1.5.0)(stylelint@16.1.0)
+      stylelint-define-config: 1.1.0(stylelint@16.1.0)
+    transitivePeerDependencies:
+      - postcss-html
     dev: true
 
   /@yutengjing/tsconfig-base@0.0.3:
@@ -5986,6 +6016,16 @@ packages:
     peerDependencies:
       stylelint: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
+      stylelint: 16.1.0(typescript@5.3.3)
+    dev: true
+
+  /stylelint-define-config@1.1.0(stylelint@16.1.0):
+    resolution: {integrity: sha512-IHdvvW1MpT5CNQpIi3UqiAvAbP9dEGsw1ULLsFtqMlYpm619VM5thCOzryG+zIWII3Cqdo0Twsp+UJ9A5kGLfw==}
+    engines: {node: '>=18.0.0', npm: '>=9.0.0', pnpm: '>=8.6.0'}
+    peerDependencies:
+      stylelint: '>=16.0.0'
+    dependencies:
+      csstype: 3.1.3
       stylelint: 16.1.0(typescript@5.3.3)
     dev: true
 

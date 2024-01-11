@@ -13,6 +13,9 @@
     "eslintConfig": {
         "extends": "@yutengjing/eslint-config-vue"
     },
+    "stylelint": {
+        "extends": "@yutengjing/stylelint-config-vue"
+    },
     "prettier": "@yutengjing/prettier-config",
     "scripts": {
         "dev": "pnpm --filter app start",
@@ -23,6 +26,7 @@
         "@types/node": "^20.10.6",
         "@yutengjing/eslint-config-vue": "^0.4.2",
         "@yutengjing/prettier-config": "^1.0.0",
+        "@yutengjing/stylelint-config-vue": "^0.1.0",
         "@yutengjing/tsconfig-node": "0.0.3",
         "@yutengjing/tsconfig-vue": "0.0.4",
         "concurrently": "^8.2.2",
