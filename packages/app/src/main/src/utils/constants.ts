@@ -7,7 +7,7 @@ import dotenv from 'dotenv';
 export const appRoot = path.resolve(__dirname, '../../../');
 
 dotenv.config({
-    path: path.resolve(__dirname, '../.env'),
+    path: path.resolve(__dirname, '.env'),
 });
 const { DEV_MODE } = process.env;
 const isDev = DEV_MODE === 'development';
