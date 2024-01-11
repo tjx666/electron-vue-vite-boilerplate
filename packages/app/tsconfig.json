@@ -1,0 +1,17 @@
+{
+    "include": [],
+    "compilerOptions": {
+        "noEmit": true
+    },
+    "references": [
+        {
+            "path": "./src/main/tsconfig.json"
+        },
+        {
+            "path": "./src/preload/tsconfig.json"
+        },
+        {
+            "path": "./src/renderer/tsconfig.json"
+        }
+    ]
+}

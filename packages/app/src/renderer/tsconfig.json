@@ -1,4 +1,8 @@
 {
     "extends": "@yutengjing/tsconfig-vue",
-    "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "vite.config.mts"]
+    "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue", "vite.config.mts"],
+    "compilerOptions": {
+        "composite": true,
+        "noEmit": true
+    }
 }

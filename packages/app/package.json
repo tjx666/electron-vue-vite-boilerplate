@@ -5,14 +5,14 @@
     "main": "src/main/dist/index.js",
     "scripts": {
         "start": "cross-env DEV_MODE=development concurrently -r -i --kill-others-on-fail npm:start:renderer npm:start:main",
-        "start:renderer": "cross-env DEV_MODE=development vite serve ./src/renderer",
         "start:main": "cross-env DEV_MODE=development tsx ./scripts/start-main.ts",
-        "type-check": "vue-tsc --noEmit -p ./src/renderer",
-        "build:renderer": "pnpm run type-check && vite build ./src/renderer",
+        "start:renderer": "cross-env DEV_MODE=development vite serve ./src/renderer",
         "build:main": "tsx ./scripts/build-main.ts",
+        "build:renderer": "vite build ./src/renderer",
         "serve": "vite preview",
         "build:app": "tsx ./scripts/pack.ts",
-        "build:win": "pnpm install && tsx ./scripts/pack.ts"
+        "build:win": "pnpm install && tsx ./scripts/pack.ts",
+        "type-check": "vue-tsc -b"
     },
     "dependencies": {
         "ant-design-vue": "^4.1.0",

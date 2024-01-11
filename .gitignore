@@ -1,6 +1,6 @@
-node_modules
-dist
 .DS_Store
 
-.pnpm-*.log
-.pnpm-store
+node_modules
+
+dist
+tsconfig.tsbuildinfo

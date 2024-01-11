@@ -1,9 +1,3 @@
 {
-    "extends": "@yutengjing/tsconfig-node",
-    "compilerOptions": {
-        "outDir": "./dist",
-        "baseUrl": "./",
-        "module": "ESNext",
-        "moduleResolution": "Bundler"
-    }
+    "extends": "../main/tsconfig.json"
 }
